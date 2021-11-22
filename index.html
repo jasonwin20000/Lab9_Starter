@@ -87,6 +87,53 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "3fe566a3b4964112a837f35dfa5965e8"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                          
+  <script>
+    TrackJS.track('Testing TrackJS!');
+
+    class VeryBadError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "VeryBad";
+      }
+    }
+
+    function badFunction(x, y) {
+      if (x != y) {
+        throw new VeryBadError("x is not equal to y")
+      }
+    }
+
+    try {
+      let yes = 1;
+    }
+    catch(e) {
+      console.log(e);
+    }
+    finally {
+      console.log('finally');
+    }
+
+    throw new VeryBadError('Oops');
+
+    try {
+      badFunction(1, 2);
+    }
+    catch (e) {
+      console.log(e.message);
+    }
+    finally {
+      console.log('finally');
+    }
+  </script>
+
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +149,84 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    errorBtns[0].addEventListener('click', () => {
+      console.log('Console Log Demo');
+    });
+
+    errorBtns[1].addEventListener('click', () => {
+      console.error('Console Error Demo');
+    });
+
+    errorBtns[2].addEventListener('click', () => {
+      console.count('Console Count Demo');
+    });
+
+    errorBtns[3].addEventListener('click', () => {
+      console.warn('Console Warn Demo');
+    });
+
+    const x = 6;
+    const y = 9;
+    const reason = 'x is expected to be equal to y'
+    errorBtns[4].addEventListener('click', () => {
+      console.assert(x == y, {x, y, reason});
+    });
+
+    errorBtns[5].addEventListener('click', () => {
+      console.clear('Console Clear Demo');
+    });
+
+    errorBtns[6].addEventListener('click', () => {
+      console.dir(errorBtns);
+    });
+
+    errorBtns[7].addEventListener('click', () => {
+      console.dirxml(errorBtns);
+    });
+
+    errorBtns[8].addEventListener('click', () => {
+      console.group('Console Group Demo');
+    });
+
+    errorBtns[9].addEventListener('click', () => {
+      console.groupEnd('Console Group End Demo');
+    });
+
+    errorBtns[10].addEventListener('click', () => {
+      console.table([
+        {
+          first: 'Jason',
+          last: 'Win',
+        },
+        {
+          first: 'David',
+          last: 'Lose',
+        }
+      ]);
+    });
+
+    errorBtns[11].addEventListener('click', () => {
+      console.time();
+    });
+
+    errorBtns[12].addEventListener('click', () => {
+      console.timeEnd();
+    });
+
+    errorBtns[13].addEventListener('click', () => {
+      console.trace();
+    });
+
+    errorBtns[14].addEventListener('click', () => {
+      throw new Error("Oops again");
+    });
+
+    TrackJS.track('Testing TrackJS!');
+
+    window.onerror = function () {
+      console.log("Oops an error!");
+    }
   </script>
 </body>
 
